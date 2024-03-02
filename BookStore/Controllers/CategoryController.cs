@@ -1,10 +1,10 @@
 ﻿using BookStore.Models;
-using JustStore.DataAccess.Repository.IRepository;
+using BookStore.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JustStoreMVC.Areas.Admin.Controllers
+namespace BookStore.Areas.Admin.Controllers
 {
     //[Area("Admin")]
     //[Authorize(Roles = SD.Role_Admin)]

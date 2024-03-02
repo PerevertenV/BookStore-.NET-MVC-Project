@@ -5,10 +5,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BookStore.Data;
-using JustStore.DataAccess.Repository.IRepository;
+using BookStore.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace JustStore.DataAccess.Repository
+namespace BookStore.DataAccess.Repository
 {
 	public class Repository<T> : IRepository<T> where T : class
 	{
@@ -18,7 +18,7 @@ namespace JustStore.DataAccess.Repository
 		{
 			_db = db;
 			this.dbSet = _db.Set<T>();
-			//_db.Products.Include(u => u.Category).Include(u => u.CategoryId);
+			_db.Products.Include(u => u.Category).Include(u => u.CategoryId);
 		}
 		public void Add(T entity)
 		{
