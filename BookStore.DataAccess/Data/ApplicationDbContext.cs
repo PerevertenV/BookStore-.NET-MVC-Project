@@ -1,18 +1,25 @@
 ﻿using BookStore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace BookStore.Data
 {
-    public class ApplicationDbContext : DbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
+	public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+	{
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
             base(options)
         {
 
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> applicationUser { get; set; }
+        public DbSet<Company> CompanyUsers { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -111,6 +118,18 @@ namespace BookStore.Data
                     CategoryId = 1,
                     ImageUrl = "\\images\\product\\037d477b-a29c-40b3-90d1-37a54f68ffb8.jpg.jpg"
                 }
+            );
+            modelBuilder.Entity<Company>().HasData(
+               new Company
+               {
+                   Id = 1,
+                   Name = "SomeCompany",
+                   State = "Uk",
+                   City = "Zhashkiv",
+                   PhoneNumber = "+380954712339",
+                   PostalCode = "19201",
+                   StreetAdress = "Gidnosti 28"
+               }
             );
         }
     }

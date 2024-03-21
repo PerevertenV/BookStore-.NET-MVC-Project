@@ -20,16 +20,24 @@ namespace BookStore.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<BookStore.Models.Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(productList);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+		public IActionResult Details(int id)
+		{
+			ShoppingCart cart = new()
+			{
+				Product = _unitOfWork.Product
+				.GetFirstOrDefault(u => u.ID == id, includeProperties: "Category"),
+				Count = 1,
+				ProductId = id
+			};
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+			return View(cart);
+		}
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
